@@ -6,7 +6,7 @@ async function main() {
   await af.waitForDeployment();
 
   console.log( 
-    `AF deployed to ${af.target}`);
+    `AF deployed to ${af.target}`); 
 }
 
 // We recommend this pattern to be able to use async/await everywhere
