@@ -5,7 +5,7 @@ async function main() {
 
   await af.waitForDeployment();
 
-  console.log(
+  console.log( 
     `AF deployed to ${af.target}`);
 }
 
@@ -13,5 +13,5 @@ async function main() {
 // and properly handle errors.
 main().catch((error) => {
   console.error(error);
-  process.exitCode = 1;
+  process.exitCode = 1; 
 });
