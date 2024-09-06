@@ -13,7 +13,7 @@ async function main() {
 
   console.log(
     `EP deployed to ${ep.target}`);
-}
+} 
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
