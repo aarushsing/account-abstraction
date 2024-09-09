@@ -9,10 +9,19 @@ async function main() {
   const entryPoint = await hre.ethers.getContractAt("EntryPoint", EP_ADDRESS);
 
 
-  const sender = await hre.ethers.getCreateAddress({
+  const sender = await hre.ethers.getCreateAddress({ // have deposite here some funds via depositTo method in entrypoint as a prefund
     from : FACTORY_ADDRESS,
     nonce : FACTORY_NONCE,
   });
+
+
+  console.log(sender);
+
+  // let do some prefund
+  // await entryPoint.depositTo(sender,{
+  //   value: hre.ethers.parseEther("100"),
+  // });
+
 
   //signer (owner) , we gonna use as an argument which will be our calldata
   const [signer] = await hre.ethers.getSigners();  // it will get us array of accounts
@@ -21,12 +30,16 @@ async function main() {
 
   const AccountFactory = await hre.ethers.getContractFactory("AccountFactory");
 
-  const initCode = FACTORY_ADDRESS + AccountFactory.interface.encodeFunctionData("createAccount",[address0]).slice(2);
+  const initCode = "0x"; //FACTORY_ADDRESS + AccountFactory.interface.encodeFunctionData("createAccount",[address0]).slice(2);
 
   const Account = await hre.ethers.getContractFactory("Account");
 
+   
+
+
+
   const userOP = {
-     sender,
+     sender, // smart account address
      nonce: await entryPoint.getNonce(sender,0),
      initCode,
      callData: Account.interface.encodeFunctionData("execute"),
