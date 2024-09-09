@@ -14,6 +14,15 @@ async function main() {
     nonce : FACTORY_NONCE
   })
 
+  //signer (owner) , we gonna use as an argument which will be our calldata
+  const [signer] = await hre.ethers.getSigners();  // it will get us array of accounts
+  const address0 = await signer.getAddress();     // we can use address of the signers we have as calldata
+
+
+  const AccountFactory = await hre.ethers.getContractFactory("AccountFactory");
+
+  const initCode = FACTORY_ADDRESS + AccountFactory.interface.encodeFunctionData("createAccount",[address0]);
+
   const userOP = {
      sender,
      nonce: await entryPoint.getNonce(sender,0),
